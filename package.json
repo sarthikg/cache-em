@@ -1,0 +1,15 @@
+{
+  "name": "cache-em",
+  "version": "1.0.7",
+  "description": "Cache Handling & Fetching from MySQL",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sarthik Gupta",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.29.1",
+    "pool-me": "^1.0.0"
+  }
+}
