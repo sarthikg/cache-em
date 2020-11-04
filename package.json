@@ -1,7 +1,7 @@
 {
   "name": "cache-em",
-  "version": "1.0.7",
-  "description": "Cache Handling & Fetching from MySQL",
+  "version": "1.1.0",
+  "description": "Cache Handling & Auto Reload for MySQL Databases",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,18 @@
   "license": "ISC",
   "dependencies": {
     "moment": "^2.29.1",
-    "pool-me": "^1.0.0"
-  }
+    "pool-me": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sarthikg/cache-em"
+  },
+  "keywords": [
+    "cache",
+    "promise",
+    "async",
+    "mysql",
+    "time",
+    "reload"
+  ]
 }

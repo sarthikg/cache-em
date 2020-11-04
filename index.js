@@ -1,21 +1,24 @@
 const moment = require('moment')
+var poolme = require('pool-me')
 
 class cacheClass {
 
-    constructor (pool, query, timeDiff) {
-        this.query = query;
-        this.firstExecution = true,
-        this.timeDiff = timeDiff;
-        this.pool = pool
+    constructor (pool, timeDiff, query, args=null) {
+        this.pool = poolme(pool)
+        this.timeDiff = timeDiff
+        this.query = query
+        this.args = args
+
+        this.firstExecution = true
         this.results = {}
     }
 
     initiate = async () => {
         let connection = await this.pool.getConnection()
-        this.results['data'] = await connection.query(this.query)
+        this.results['data'] = await connection.query(this.query, this.args)
         this.results['endTime'] = this.handleTime()
         connection.release()
-        return this.results
+        return this.results.data
     }
 
     fetch = async () => {
@@ -27,22 +30,19 @@ class cacheClass {
             if (currentTime.isAfter(this.results.endTime)) {
                 return await this.initiate()
             } else {
-                return this.results
+                return this.results.data
             }
         }
-
     }
 
     handleTime = () => {
-        let endTime = moment().add(this.timeDiff, 'minutes')
+        let endTime = moment().add(this.timeDiff, 'ms')
         return endTime
     }
 }
 
-
-cache = (pool, query, timeDiff) => {
-    return new cacheClass(pool, query, timeDiff)
+cache = (pool, timeDiff, query, args=null) => {
+    return new cacheClass(pool, timeDiff, query, args)
 }
-
 
 module.exports = cache
