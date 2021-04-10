@@ -3,7 +3,7 @@ var poolme = require('pool-me')
 
 class cacheClass {
 
-    constructor (pool, timeDiff, query, args=null) {
+    constructor (pool, timeDiff, query, args=undefined) {
         this.pool = poolme(pool)
         this.timeDiff = timeDiff
         this.query = query
@@ -33,6 +33,15 @@ class cacheClass {
                 return this.results.data
             }
         }
+    }
+
+    refresh = async () => {
+        return await this.initiate()
+    }
+
+    clear = () => {
+        this.results = {}
+        this.firstExecution = true
     }
 
     handleTime = () => {

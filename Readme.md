@@ -1,5 +1,4 @@
 # Cache-em
-<<<<<<< HEAD
 Autocomplete Input Forms or Drop Down Menu's with data to be served from a SQL Database are a pain to implement. This is for 3 mains reasons:
 1. Securing Data by limiting only suggested data on the frontend.
 2. Reduce the number of queries to the Database.
@@ -44,6 +43,19 @@ If the data is fetched while the data hasn't expired, there will be no new query
  let data_states = await cached_states.fetch()
  ```
 
+ ### Clearing Cache
+ Clearing the cache might come in handy in some cases. Clear method lets you clear the cache at any instance and save your memory.
+ One thing to be noted is that even after you clear the cache, the query and the time are still stored, which gives you the option to call back the fetch method to repopulate the cache.
+ ``` javascript
+ cached_states.clear()
+ ```
+
+ ### Force Refreshing
+ In some cases, upon updating the database, you would want to force a refresh for the cache data. This can be done by the refresh method that allows you to bypass the auto-refresh time delared earlier.
+  ``` javascript
+ let refreshed_data_states = await cached_states.refresh()
+ ```
+ 
 ## Example
 And here we present you with a working example, to help you fast-forward with the relatively small documentation ;)
 ``` javascript
@@ -70,6 +82,3 @@ FetchStates()
 
 ## Contribution
 The package is in its budding stage. Refer to the github repository for all the suggestions, pull-requests, issues, everything.
-=======
-This package enables to create in-memory cache from MySQL with refresh timers.
->>>>>>> 6336ae777dfba2327aefa6035f70182596c38ab6
